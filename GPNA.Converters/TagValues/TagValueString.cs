@@ -6,6 +6,6 @@ namespace GPNA.Converters.TagValues
     /// </summary>
     public class TagValueString : TagValue
     {
-        public string? Value { get; set; }
+        public string Value { get; set; }
     }
 }

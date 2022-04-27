@@ -5,6 +5,6 @@
         /// <summary>
         /// Значение тега
         /// </summary>
-        public dynamic? Value { get; set; }
+        public dynamic Value { get; set; }
     }
 }

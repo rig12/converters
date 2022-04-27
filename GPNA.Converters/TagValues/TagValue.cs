@@ -45,6 +45,6 @@ namespace GPNA.Converters.TagValues
         /// Полное наименование тэга
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public string? Tagname { get; set; } = string.Empty;
+        public string Tagname { get; set; } = string.Empty;
     }
 }
