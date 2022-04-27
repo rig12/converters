@@ -1,10 +1,10 @@
-﻿namespace GPNA.Common.Tests.Services
+﻿namespace GPNA.Converters.Tests.Services
 {
     #region Using
     using NUnit.Framework;
     using Microsoft.Extensions.Logging;
-    using Model.TagValue;
     using Moq;
+    using GPNA.Converters.TagValues;
     #endregion Using
 
     public class TagValueConverterUnitTests

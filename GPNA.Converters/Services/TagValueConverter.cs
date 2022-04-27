@@ -10,7 +10,6 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
     using System.Reflection;
-    using GPNA.Common.Constants;
 
     #endregion Using
 
@@ -92,7 +91,7 @@
                         result = func();
                         if (result != default)
                         {
-                            var property = result.GetType().GetProperty(CommonConstants.VALUE_PROPERTY_NAME);
+                            var property = result.GetType().GetProperty(nameof(TagValueDynamic.Value));
                             if (property != default)
                             {
                                 property.SetValue(result, Cast(tagValueDynamic.Value, type));
