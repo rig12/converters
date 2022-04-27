@@ -10,4 +10,4 @@ dotnet build
 echo "Publish nuget package"
 cd dotnet
 dotnet pack -p:PackageVersion=$VERSION -o ./
-dotnet nuget push GPNA.Templates.$VERSION.nupkg -s space
+dotnet nuget push GPNA.Converters.$VERSION.nupkg -s space
