@@ -6,6 +6,9 @@ job(".NET Core GPNA.Converters build,test and publish"){
                 echo DOTNET ADD GPNA.COMMON...
                 dotnet add ./GPNA.Converters package GPNA.Common --source https://nuget.pkg.jetbrains.space/gpna/p/gpna-common/common/v3/index.json
                 
+				echo RUN TESTS...
+                dotnet test ./GPNA.Converters.Tests/
+
                 echo PUBLISH NUGET PACKAGE...
                 chmod +x publish.sh
                 
