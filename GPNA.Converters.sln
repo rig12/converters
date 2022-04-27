@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPNA.Converters", "GPNA.Converters\GPNA.Converters.csproj", "{41CF9D3B-DFA1-422C-A96E-FE5C85FDB509}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPNA.Converters.Tests", "GPNA.Converters.Tests\GPNA.Converters.Tests.csproj", "{860C5F2F-6893-4060-85D8-1AC974CB0576}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{41CF9D3B-DFA1-422C-A96E-FE5C85FDB509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41CF9D3B-DFA1-422C-A96E-FE5C85FDB509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41CF9D3B-DFA1-422C-A96E-FE5C85FDB509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{860C5F2F-6893-4060-85D8-1AC974CB0576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{860C5F2F-6893-4060-85D8-1AC974CB0576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{860C5F2F-6893-4060-85D8-1AC974CB0576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{860C5F2F-6893-4060-85D8-1AC974CB0576}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
