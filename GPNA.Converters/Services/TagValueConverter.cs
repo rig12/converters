@@ -187,7 +187,7 @@
 
             result.Tagname = tagname;
             result.DateTime = dateTime.Kind == DateTimeKind.Utc ? dateTime.ToLocalTime() : dateTime;
-            result.DateTimeUtc = result.DateTimeUtc?.ToUniversalTime();
+            result.DateTimeUtc = result.DateTime?.ToUniversalTime();
             result.OpcQuality = quality;
             return result;
         }
