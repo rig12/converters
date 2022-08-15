@@ -1,15 +1,16 @@
 ﻿namespace GPNA.Converters.Services
 {
     #region Using
-    
-    using GPNA.Converters.TagValues;    
+
+    using GPNA.Converters.TagValues;
+    using GPNA.Extensions.Types;
     using Interfaces;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq.Expressions;
-    using System.Reflection;
 
     #endregion Using
 
@@ -36,8 +37,8 @@
 
         #region Fields
         private readonly ILogger<TagValueConverter> _logger;
-        private readonly Dictionary<Type, Func<TagValue>> _lambdas = new Dictionary<Type, Func<TagValue>>();
-        private readonly Dictionary<Type, Type> _pairs = new Dictionary<Type, Type>()
+        private readonly Dictionary<Type, Func<TagValue>> _lambdas = new();
+        private readonly Dictionary<Type, Type> _pairs = new()
         {
             { typeof(double), typeof(TagValueDouble) },
             { typeof(DateTime), typeof(TagValueDateTime) },
@@ -46,6 +47,7 @@
             { typeof(long), typeof(TagValueInt64) },
             { typeof(string), typeof(TagValueString) }
         };
+
         #endregion Fields
 
 
@@ -119,6 +121,76 @@
             }
             return result;
         }
-        #endregion Methods       
+
+
+        /// <summary>
+        /// возвращает значение типа, соответствующего реальному значению в строке
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="datetimeParseFormat"></param>
+        /// <returns></returns>
+        public dynamic? GetValue(string value, string datetimeParseFormat = "yyyy-MM-dd HH:mm")
+        {
+            if (string.IsNullOrEmpty(value))
+                return default;
+
+            if (DateTime.TryParseExact(value, datetimeParseFormat, null, DateTimeStyles.None, out var datetimeval))
+                return datetimeval.ToUniversalTime();
+
+            if (int.TryParse(value, out var intval))
+                return intval;
+
+            if (bool.TryParse(value, out var boolval))
+                return boolval;
+
+            if (double.TryParse(value, out var doubleval))
+                return doubleval;
+
+            return value;
+
+        }
+
+        /// <summary>
+        /// Возвращает соответствующую реальному типу значения Value одну из структур TagValueXxx
+        /// <seealso cref="TagValueBool"/> <seealso cref="TagValueDateTime"/> <seealso cref="TagValueDouble"/> <seealso cref="TagValueInt32"/> <seealso cref="TagValueInt64"/> <seealso cref="TagValueNull"/><seealso cref="TagValueString"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="dateTime"></param>
+        /// <param name="tagname"></param>
+        /// <param name="quality"></param>
+        /// <returns></returns>
+        public TagValue GetTagValue(string value, DateTime dateTime, string tagname, int quality)
+        {
+            var dynamicvalue = GetValue(value);
+            TagValue result = null;
+            if (value != null)
+            {
+                if (dynamicvalue is object objvalue
+                    && _lambdas.TryGetValue(objvalue.GetType(), out var func))
+                {
+                    result = func();
+
+                    if (objvalue?.GetType() is Type type && (type.IsSimple() || type == typeof(DateTime)))
+                    {
+                        var valueproperty = result.GetType().GetProperty("Value");
+                        if (valueproperty != null)
+                        {
+                            valueproperty.SetValue(result, objvalue);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                result = new TagValueNull();
+            }
+
+            result.Tagname = tagname;
+            result.DateTime = dateTime.Kind == DateTimeKind.Utc ? dateTime.ToLocalTime() : dateTime;
+            result.DateTimeUtc = result.DateTimeUtc?.ToUniversalTime();
+            result.OpcQuality = quality;
+            return result;
+        }
+        #endregion Methods
     }
 }
