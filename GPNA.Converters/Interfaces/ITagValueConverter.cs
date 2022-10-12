@@ -25,6 +25,16 @@ namespace GPNA.Converters.Interfaces
         dynamic? GetValue(string valueString, string datetimeParseFormat = "yyyy-MM-dd HH:mm");
 
         /// <summary>
+        /// вовзращает значение типа Double, если переданная строка может быть успешно преобразована в double
+        /// для других типов - int->int.0; bool->0.0(false)/1.0(true); datetime->UnixTimestam(кол-во секунд от 01.01.1970)
+        /// в остальных случаях - null
+        /// </summary>
+        /// <param name="valuestring"></param>
+        /// <param name="datetimeParseFormat"></param>
+        /// <returns></returns>
+        double? GetDoubleValue(string valuestring, string datetimeParseFormat);
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="value"></param>

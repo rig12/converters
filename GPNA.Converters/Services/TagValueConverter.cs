@@ -5,6 +5,7 @@
     using GPNA.Converters.TagValues;
     using GPNA.Extensions.Types;
     using Interfaces;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using System;
@@ -190,6 +191,28 @@
             result.DateTimeUtc = result.DateTime?.ToUniversalTime();
             result.OpcQuality = quality;
             return result;
+        }
+
+        public double? GetDoubleValue(string valuestring, string datetimeParseFormat)
+        {
+            if (double.TryParse(valuestring, out var doublevalue))
+            {
+                return doublevalue;
+            }
+            else
+                if (bool.TryParse(valuestring, out var boolvalue))
+            {
+                return boolvalue ? 1 : 0;
+            }
+            else
+                if (DateTime.TryParseExact(valuestring, datetimeParseFormat, null, DateTimeStyles.None, out var datetimevalue))
+            {                
+                return datetimevalue.ToUniversalTime().ConvertToUnixTimestamp();
+            }
+            else
+            {
+                return null;
+            }
         }
         #endregion Methods
     }
