@@ -32,7 +32,7 @@ namespace GPNA.Converters.Interfaces
         /// <param name="valuestring"></param>
         /// <param name="datetimeParseFormat"></param>
         /// <returns></returns>
-        double? GetDoubleValue(string valuestring, string datetimeParseFormat);
+        double? GetDoubleValue(string valuestring, string datetimeParseFormat = "yyyy-MM-dd HH:mm");
 
         /// <summary>
         /// 

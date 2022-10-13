@@ -193,7 +193,7 @@
             return result;
         }
 
-        public double? GetDoubleValue(string valuestring, string datetimeParseFormat)
+        public double? GetDoubleValue(string valuestring, string datetimeParseFormat = "yyyy-MM-dd HH:mm")
         {
             if (double.TryParse(valuestring, out var doublevalue))
             {
