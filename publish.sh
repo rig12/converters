@@ -9,5 +9,7 @@ dotnet build
                 
 echo "Publish nuget package"
 cd dotnet
-dotnet pack -p:PackageVersion=$VERSION -o ./
-dotnet nuget push GPNA.Converters.$VERSION.nupkg -s space
+# Beware create old format debug info
+dotnet pack -p:IncludeSymbols=true -p:SymbolPackageFormat=symbols.nupkg -p:PackageVersion=$VERSION -o ./
+dotnet nuget push GPNA.Extensions.$VERSION.nupkg -s space
+dotnet nuget push GPNA.Extensions.$VERSION.symbols.nupkg -s space
