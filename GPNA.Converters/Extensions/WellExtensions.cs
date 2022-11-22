@@ -11,6 +11,11 @@
         private const int BRANCHID_SYMBOLS_COUNT = 3;
         private const int MIN_SYMBOLS_COUNT = 8;
 
+        /// <summary>
+        /// Парсинг номера скважины в месторождение
+        /// </summary>
+        /// <param name="wellId">Номер скважины</param>
+        /// <returns>Возвращает местрождение</returns>
         public static int ParseFieldId(this long wellId)
         {
             string strResult = string.Empty;

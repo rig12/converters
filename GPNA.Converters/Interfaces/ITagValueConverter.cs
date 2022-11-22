@@ -17,12 +17,12 @@ namespace GPNA.Converters.Interfaces
         TagValue GetTagValue(string json);
 
         /// <summary>
-        /// возвращает значение типа, соответствующего реальному значению в строке 
+        /// Возвращает значение типа, соответствующего реальному значению в строке 
         /// </summary>
-        /// <param name="valueString">значение в виде строки</param>
-        /// <param name="datetimeParseFormat">шаблон парсинга значения <seealso cref="valueString"/> если внутри дата-время> </param>
-        /// <returns></returns>
-        dynamic? GetValue(string valueString, string datetimeParseFormat = "yyyy-MM-dd HH:mm");
+        /// <param name="value">Значение в виде строки</param>
+        /// <param name="datetimeParseFormat">Шаблон парсинга значения параметра value если внутри дата-время></param>
+        /// <returns>Воозвращает значение у случае успеха, иначе null</returns>
+        dynamic? GetValue(string value, string datetimeParseFormat = "yyyy-MM-dd HH:mm");
 
         /// <summary>
         /// вовзращает значение типа Double, если переданная строка может быть успешно преобразована в double

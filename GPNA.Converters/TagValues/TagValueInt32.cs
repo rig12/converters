@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GPNA.Converters.TagValues
+﻿namespace GPNA.Converters.TagValues
 {
+    #region Using
+    #endregion Using
+
+    /// <summary>
+    /// Целочисленный тег
+    /// </summary>
     public class TagValueInt32 : TagValue
     {
         /// <summary>
-        /// Значение тега
+        /// Целочисленное значение тега
         /// </summary>
         public int? Value { get; set; }
     }

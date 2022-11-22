@@ -21,6 +21,10 @@
     public class TagValueConverter : ITagValueConverter
     {
         #region Constructors
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        /// <param name="logger"></param>
         public TagValueConverter(ILogger<TagValueConverter> logger)
         {
             _logger = logger;
@@ -70,11 +74,22 @@
             return default;
         }
 
+        /// <summary>
+        /// Преобразовать объект к типу
+        /// </summary>
+        /// <param name="obj">Объект для преобразования</param>
+        /// <param name="castTo">Тип</param>
+        /// <returns>Возвращает преобразованный объект</returns>
         public static dynamic Cast(dynamic obj, Type castTo)
         {
             return Convert.ChangeType(obj, castTo);
         }
 
+        /// <summary>
+        /// Преобразовать JSON объект к типу тега
+        /// </summary>
+        /// <param name="json">JSON объекта</param>
+        /// <returns>Возвращает тег</returns>
         public TagValue GetTagValue(string json)
         {
             TagValue result = null;
@@ -125,11 +140,11 @@
 
 
         /// <summary>
-        /// возвращает значение типа, соответствующего реальному значению в строке
+        /// Возвращает значение типа, соответствующего реальному значению в строке 
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="datetimeParseFormat"></param>
-        /// <returns></returns>
+        /// <param name="value">Значение в виде строки</param>
+        /// <param name="datetimeParseFormat">Шаблон парсинга значения параметра value если внутри дата-время></param>
+        /// <returns>Воозвращает значение у случае успеха, иначе null</returns>
         public dynamic? GetValue(string value, string datetimeParseFormat = "yyyy-MM-dd HH:mm")
         {
             if (string.IsNullOrEmpty(value))
@@ -193,6 +208,12 @@
             return result;
         }
 
+        /// <summary>
+        /// Получить преобразованное из строки значение с плавающей точкой
+        /// </summary>
+        /// <param name="valuestring">Строка для преобразования</param>
+        /// <param name="datetimeParseFormat">Формат даты/времени</param>
+        /// <returns>Возвращает значение в случае успеха, иначе Null</returns>
         public double? GetDoubleValue(string valuestring, string datetimeParseFormat = "yyyy-MM-dd HH:mm")
         {
             if (double.TryParse(valuestring, out var doublevalue))
@@ -204,9 +225,8 @@
             {
                 return boolvalue ? 1 : 0;
             }
-            else
-                if (DateTime.TryParseExact(valuestring, datetimeParseFormat, null, DateTimeStyles.None, out var datetimevalue))
-            {                
+            else if (DateTime.TryParseExact(valuestring, datetimeParseFormat, null, DateTimeStyles.None, out var datetimevalue))
+            {
                 return datetimevalue.ToUniversalTime().ConvertToUnixTimestamp();
             }
             else

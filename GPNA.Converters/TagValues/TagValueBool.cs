@@ -5,6 +5,9 @@
     /// </summary>    
     public class TagValueBool : TagValue
     {
+        /// <summary>
+        /// Булевское значение
+        /// </summary>
         public bool Value { get; set; }
     }
 }
