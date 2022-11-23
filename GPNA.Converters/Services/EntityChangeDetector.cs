@@ -100,7 +100,7 @@
         /// <param name="entities">Сущности к проверке на изменение</param>
         /// <param name="isReload">Флаг полной загрузки</param>
         /// <returns>Возвращает коллекцию изменившихся объектов</returns>
-        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом<see cref="KeyAttribute"/></exception>
+        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом <see cref="KeyAttribute"/></exception>
         public IEnumerable<ChangeEntity> Load<TEntity>(IEnumerable<TEntity> entities, bool isReload = false)
             where TEntity : INotifyPropertyChanged
         {
@@ -153,7 +153,7 @@
         /// <typeparam name="TEntity">Тип изменяемого объекта</typeparam>
         /// <param name="entity">Сущность к удалению</param>
         /// <returns>Возвращает объект если он ранее был добавлен, в обратном случае Null</returns>
-        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом<see cref="KeyAttribute"/></exception>
+        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом <see cref="KeyAttribute"/></exception>
         public ChangeEntity? Delete<TEntity>(TEntity entity) where TEntity : INotifyPropertyChanged
         {
             var type = typeof(TEntity);
@@ -191,7 +191,7 @@
         /// <typeparam name="TEntity">Тип изменяемого объекта</typeparam>
         /// <param name="entity">Сущность к сохранению</param>
         /// <returns>Возвращает объект если он ранее не был добавил или обновлен, иначе Null</returns>
-        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом<see cref="KeyAttribute"/></exception>
+        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом <see cref="KeyAttribute"/></exception>
         public ChangeEntity? Save<TEntity>(TEntity entity) where TEntity : INotifyPropertyChanged
         {
             var type = typeof(TEntity);
