@@ -84,7 +84,10 @@
                     stringBuilder.Append(delimiter);
                     var value = ObjectDescriptionHelper.GetPropertyValue(entity, description.PropertyName);
                     stringBuilder.Append(value ?? NULL_TEXT);
-                    delimiter = DELIMITER;
+                    if (!string.Equals(delimiter, DELIMITER))
+                    {
+                        delimiter = DELIMITER;
+                    }
                 }
             }
             return stringBuilder.ToString();
@@ -142,6 +145,74 @@
                     yield return deletedEntity;
                 }
             }
+        }
+
+        /// <summary>
+        /// Удаление сущности
+        /// </summary>
+        /// <typeparam name="TEntity">Тип изменяемого объекта</typeparam>
+        /// <param name="entity">Сущность к удалению</param>
+        /// <returns>Возвращает объект если он ранее был добавлен, в обратном случае Null</returns>
+        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом<see cref="KeyAttribute"/></exception>
+        public ChangeEntity? Delete<TEntity>(TEntity entity) where TEntity : INotifyPropertyChanged
+        {
+            var type = typeof(TEntity);
+            if (!ObjectDescriptionHelper.IsContainsKey(type))
+            {
+                throw new ArgumentException($"The type '{type.FullName}' should contains at least one property with '{typeof(KeyAttribute).FullName}'");
+            }
+            var code = GetCode(entity);
+            if (!_storage.ContainsKey(type))
+            {
+                return default;
+            }           
+            if (!_storage[type].ContainsKey(code))
+            {
+                return default;
+            }
+            var deletedEntity = BuildEntity<TEntity>(EntityStatus.Delete, 
+                ObjectDescriptionHelper.GetTableName(type), GetUtcOffset().DateTime, code);
+            foreach (var propertyDescription in _objectDescriptionCache.Get(type))
+            {
+                deletedEntity.Values.Add(new ChangeValue()
+                {
+                    Name = propertyDescription.ColumnName,
+                    Value = ObjectDescriptionHelper.GetPropertyValue(entity, propertyDescription.PropertyName),
+                    TypeName = propertyDescription.TypeName,
+                    IsKey = propertyDescription.IsKey
+                });
+            }
+            return deletedEntity;
+        }
+
+        /// <summary>
+        /// Сохранить сущность
+        /// </summary>
+        /// <typeparam name="TEntity">Тип изменяемого объекта</typeparam>
+        /// <param name="entity">Сущность к сохранению</param>
+        /// <returns>Возвращает объект если он ранее не был добавил или обновлен, иначе Null</returns>
+        /// <exception cref="ArgumentException">Возвращает в случае отсутсвия свойств с ключом<see cref="KeyAttribute"/></exception>
+        public ChangeEntity? Save<TEntity>(TEntity entity) where TEntity : INotifyPropertyChanged
+        {
+            var type = typeof(TEntity);
+            if (!ObjectDescriptionHelper.IsContainsKey(type))
+            {
+                throw new ArgumentException($"The type '{type.FullName}' should contains at least one property with '{typeof(KeyAttribute).FullName}'");
+            }
+            var code = GetCode(entity);
+            var tableName = ObjectDescriptionHelper.GetTableName(type);
+            var offset = GetUtcOffset();
+            var notifyEntity = _storage[type].ContainsKey(code) ? _storage[type][code] : default;
+            ChangeEntity? activeEntity = default;
+            if (notifyEntity != default)
+            {
+                activeEntity = Update(entity, tableName, offset.DateTime, notifyEntity, code);
+            }
+            else
+            {
+                activeEntity = Add(entity, tableName, offset.DateTime, code);
+            }
+            return activeEntity;
         }
 
         private IEnumerable<ChangeEntity> Delete<TEntity>(string tableName, DateTime dateTime) where TEntity : INotifyPropertyChanged
