@@ -50,6 +50,7 @@
             { typeof(bool), typeof(TagValueBool) },
             { typeof(int), typeof(TagValueInt32) },
             { typeof(long), typeof(TagValueInt64) },
+            { typeof(ulong), typeof(TagValueInt64) },
             { typeof(string), typeof(TagValueString) }
         };
 
