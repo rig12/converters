@@ -5,7 +5,6 @@
     using GPNA.Converters.TagValues;
     using GPNA.Extensions.Types;
     using Interfaces;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using System;
@@ -36,6 +35,12 @@
                     _lambdas.Add(item.Key, lambda);
                 }
             }
+
+            _settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore
+            };
         }
         #endregion Constructors
 
@@ -53,6 +58,7 @@
             { typeof(ulong), typeof(TagValueInt64) },
             { typeof(string), typeof(TagValueString) }
         };
+        private JsonSerializerSettings _settings;
 
         #endregion Fields
 
@@ -234,6 +240,11 @@
             {
                 return null;
             }
+        }
+
+        public TagValueString GetTagValueString(string json)
+        {
+            return JsonConvert.DeserializeObject<TagValueString>(json, _settings);
         }
         #endregion Methods
     }
