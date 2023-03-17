@@ -33,7 +33,15 @@
             return result;
         }
 
-        public IEnumerable<TEntity> Get<TEntity, TIdType>(string fileName, IEnumerable<PropertyConfiguration> configurations)
+        /// <summary>
+        /// Получить объекты из файла
+        /// </summary>
+        /// <typeparam name="TEntity">Тип</typeparam>
+        /// <typeparam name="TIdType">Тип идентификатора</typeparam>
+        /// <param name="initFilePath">Имя файла</param>
+        /// <param name="configurations">Конфигурация для парсинга файла</param>
+        /// <returns>Возвращает коллекцию объектов</returns>
+        public IEnumerable<TEntity> Get<TEntity, TIdType>(string initFilePath, IEnumerable<PropertyConfiguration> configurations)
             where TEntity : CacheEntityBase<TIdType>
             where TIdType : struct
         {
@@ -45,7 +53,7 @@
             var codes = new HashSet<string>();
             var lineNumb = 0;
 
-            foreach (var row in GetFromFile(fileName, true))
+            foreach (var row in GetFromFile(initFilePath, true))
             {
                 lineNumb++;
                 StringBuilder codeBuilder = new();

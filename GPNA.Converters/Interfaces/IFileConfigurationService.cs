@@ -15,10 +15,10 @@
         /// </summary>
         /// <typeparam name="TEntity">Тип</typeparam>
         /// <typeparam name="TIdType">Тип идентификатора</typeparam>
-        /// <param name="fileName">Имя файла</param>
+        /// <param name="initFilePath">Полный путь к файлу</param>
         /// <param name="configurations">Конфигурация для парсинга файла</param>
         /// <returns>Возвращает коллекцию объектов</returns>
-        IEnumerable<TEntity> Get<TEntity, TIdType>(string fileName, IEnumerable<PropertyConfiguration> configurations)
+        IEnumerable<TEntity> Get<TEntity, TIdType>(string initFilePath, IEnumerable<PropertyConfiguration> configurations)
             where TEntity : CacheEntityBase<TIdType>
             where TIdType : struct;
     }
