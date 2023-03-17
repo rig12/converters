@@ -14,7 +14,7 @@
         /// </summary>
         /// <param name="tagvalue">Базовый объект тега</param>
         /// <returns>Возвращает строку</returns>
-        public static string GetValue(this TagValue tagvalue)
+        public static string GetStringValue(this TagValue tagvalue)
         {
             var type = tagvalue.GetType();
             var prop = type.GetProperty("Value");

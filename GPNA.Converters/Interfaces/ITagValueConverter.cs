@@ -43,5 +43,12 @@ namespace GPNA.Converters.Interfaces
         /// <param name="quality"></param>
         /// <returns></returns>
         TagValue GetTagValue(string value, DateTime dateTime, string tagname, int quality);
+
+        /// <summary>
+        /// получить структуру TagValue со строковым значением <seealso cref="TagValueString"/>
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        TagValueString GetTagValueString(string json);
     }
 }

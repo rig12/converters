@@ -5,6 +5,8 @@
     using Microsoft.Extensions.Logging;
     using Moq;
     using GPNA.Converters.TagValues;
+    using Newtonsoft.Json;
+    using System.Runtime;
     #endregion Using
 
     public class TagValueConverterUnitTests
@@ -225,6 +227,17 @@
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(entity);
             var result = _tagValueConverterTestable.GetTagValue(json);
             Assert.IsTrue(result is TagValueNull);
+        }
+
+        [Test]
+        public void GetTagValueString_from_empty_string()
+        {
+            var entity = new TagValueString { };            
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(entity);
+            var result = _tagValueConverterTestable.GetTagValueString(json);
+            Assert.IsTrue(result is not null);
+            Assert.IsTrue(string.IsNullOrEmpty(result.Value));
+
         }
         #endregion Methods
     }
