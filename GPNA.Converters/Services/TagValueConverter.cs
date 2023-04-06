@@ -129,6 +129,8 @@
                     result = new TagValueNull();
                 }
                 result.DateTime = tagValueDynamic.DateTime;
+                result.DateTimeUtc = tagValueDynamic.DateTimeUtc;
+                result.TimeStampUtc = tagValueDynamic.TimeStampUtc;
                 result.OpcQuality = tagValueDynamic.OpcQuality;
                 result.TagId = tagValueDynamic.TagId;
                 if (!string.IsNullOrEmpty(tagValueDynamic.Tagname))
@@ -242,6 +244,11 @@
             }
         }
 
+        /// <summary>
+        /// возвращает значение <seealso cref="TagValueString.Value"/> в виде строки
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public TagValueString GetTagValueString(string json)
         {
             return JsonConvert.DeserializeObject<TagValueString>(json, _settings);
