@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GPNA.Extensions" Version="1.0.46" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.17.2" />
     <PackageReference Include="NUnit" Version="3.13.2" />
@@ -27,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GPNA.Converters\GPNA.Converters.csproj" />
+    <ProjectReference Include="..\Converters\Converters.csproj" />
   </ItemGroup>
 
 </Project>
