@@ -1,6 +1,6 @@
 
 
-namespace GPNA.Converters.TagValues
+namespace Converters.TagValues
 {
     #region Using
     using System;

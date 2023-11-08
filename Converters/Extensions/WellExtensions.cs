@@ -1,4 +1,4 @@
-﻿namespace GPNA.Converters.Extensions
+﻿namespace Converters.Extensions
 {
     #region Using
     #endregion Using

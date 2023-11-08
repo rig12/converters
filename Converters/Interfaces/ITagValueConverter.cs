@@ -1,8 +1,8 @@
 ﻿
-using GPNA.Converters.TagValues;
+using Converters.TagValues;
 using System;
 
-namespace GPNA.Converters.Interfaces
+namespace Converters.Interfaces
 {
     /// <summary>
     /// Интерфейс преобразования значений тегов

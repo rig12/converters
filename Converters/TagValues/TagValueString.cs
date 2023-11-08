@@ -1,4 +1,4 @@
-﻿namespace GPNA.Converters.TagValues
+﻿namespace Converters.TagValues
 {
     /// <summary>
     /// Значение тэга строкового типа

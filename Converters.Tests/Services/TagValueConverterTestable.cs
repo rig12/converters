@@ -1,6 +1,6 @@
-﻿namespace GPNA.Converters.Tests.Services
+﻿namespace Converters.Tests.Services
 {
-    using GPNA.Converters.Services;
+    using Converters.Services;
     #region Using
     using Microsoft.Extensions.Logging;
     #endregion Using

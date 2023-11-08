@@ -1,10 +1,10 @@
-﻿namespace GPNA.Converters.Tests.Services
+﻿namespace Converters.Tests.Services
 {
     #region Using
     using NUnit.Framework;
     using Microsoft.Extensions.Logging;
     using Moq;
-    using GPNA.Converters.TagValues;
+    using Converters.TagValues;
     using Newtonsoft.Json;
     using System.Runtime;
     #endregion Using

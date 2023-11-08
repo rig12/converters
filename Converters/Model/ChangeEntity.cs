@@ -1,4 +1,4 @@
-﻿namespace GPNA.Converters.Model
+﻿namespace Converters.Model
 {
     #region Using
     using System.Collections.Generic;

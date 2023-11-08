@@ -1,4 +1,4 @@
-﻿namespace GPNA.Converters.Services
+﻿namespace Converters.Services
 {
     #region Using
     using System;

@@ -1,4 +1,4 @@
-﻿namespace GPNA.Converters.Interfaces
+﻿namespace Converters.Interfaces
 {
     #region Using
     using Model;

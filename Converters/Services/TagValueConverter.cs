@@ -1,9 +1,9 @@
-﻿namespace GPNA.Converters.Services
+﻿namespace Converters.Services
 {
     using global::Converters.Extensions;
     #region Using
 
-    using GPNA.Converters.TagValues;
+    using Converters.TagValues;
     using Interfaces;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;

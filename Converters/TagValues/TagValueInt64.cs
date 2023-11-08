@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GPNA.Converters.TagValues
+namespace Converters.TagValues
 {
     /// <summary>
     /// Значение тега целочисленного типа

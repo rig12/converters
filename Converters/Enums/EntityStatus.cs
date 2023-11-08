@@ -1,4 +1,4 @@
-﻿namespace GPNA.Converters.Enums
+﻿namespace Converters.Enums
 {
     #region Using
     #endregion Using
